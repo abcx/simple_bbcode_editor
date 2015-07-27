@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>simple_bbcode_editor</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="bbcodeeditor.css">
+        <style type="text/css">
+            body {background: #efefef}
+            .formatText + p {display: none}
+            #todelete + p {color:red}
+        </style>
+    </head>
+    <body>
+
+        <p class="clearfix">                     
+            <textarea rows="5" id="lead" name="lead"><a href="http://test.com">test link</a><br/><b>bold</b><br/><i>italic</i></textarea>
+        </p>
+        <p class="clearfix">                     
+            <textarea rows="5" id="desc" name="desc"></textarea>
+        </p>
+        <p class="clearfix">
+            <p>This instance <b>bbCodeEditor</b> will be removed after 3 seconds.</p>
+            <textarea rows="5" id="todelete" name="todelete"></textarea>
+            <p>This instance <b>bbCodeEditor</b> is removed.</p>
+        </p>
+        <div class="clearfix"></div>
+        <p class="clearfix">                     
+            <textarea rows="5" id="valued" name="valued">Lorem ipsum.</textarea>
+        </p>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="bbcodeeditor.js"></script>
+        
+        <script>
+            $(document).ready(function(){
+                
+                $("#lead").bbCodeEditor({
+                    mode: 'bbcode',      // or 'html' to display html in edit window
+                    convert: 'true'      // converts textarea html contents to bbcode on plugin init
+                });
+                
+                $("#desc").bbCodeEditor({mode:'html'});
+                
+                $("#todelete").bbCodeEditor({mode:'html'});
+
+                $("#valued").bbCodeEditor({mode:'html'});
+                
+                setTimeout(function(){
+                    var $todelete = $("#todelete");
+                    $todelete.bbCodeEditor('destroy');
+                    $todelete.prev().hide();
+                }, 3000);
+                
+            })
+        </script>
+    </body>
+</html>
